@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>侍たちの見切り - 反応速度計測</title>
+    <title>刹那の見切り - 反応速度計測</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <!-- 1. ホーム画面 -->
     <div id="home-screen" class="screen active">
-        <h1 class="title">侍たちの見切り</h1>
+        <h1 class="title">刹那の見切り</h1>
         <p class="subtitle">「！」が出たら一閃！コンマ秒の真剣勝負</p>
         
         <div class="menu-buttons">
@@ -72,12 +72,21 @@
                 <input type="checkbox" id="bgm-toggle" checked onchange="toggleSound(this.checked)">
             </div>
 
-            <!-- 💡 BGM音量設定スライダーを追加 -->
+            <!-- 💡 BGM音量設定スライダー -->
             <div class="setting-item">
                 <label for="bgm-volume">BGM 音量:</label>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <input type="range" id="bgm-volume" min="0" max="1" step="0.05" value="0.5" oninput="setBGMVolume(this.value)">
                     <span id="volume-val" style="width: 35px; text-align: right;">50%</span>
+                </div>
+            </div>
+
+            <!-- 💡 SE音量設定スライダー（新規追加） -->
+            <div class="setting-item">
+                <label for="se-volume">SE 音量:</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <input type="range" id="se-volume" min="0" max="1" step="0.05" value="0.8" oninput="setSEVolume(this.value)">
+                    <span id="se-volume-val" style="width: 35px; text-align: right;">80%</span>
                 </div>
             </div>
 
