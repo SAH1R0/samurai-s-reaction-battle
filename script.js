@@ -23,7 +23,7 @@ const tokenSecretRev = "5Wj";
 const GITHUB_TOKEN = tokenPrefix + tokenSecret + tokenSecretRev.split("").reverse().join("");
 
 const REPO_OWNER = "SAH1R0";
-const REPO_NAME = "samurai-reaction-game";
+const REPO_NAME = "samurai-s-reaction-battle";
 
 // ==========================================
 // 🔊 サウンド処理（BGM・SE・音量）
