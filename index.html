@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>侍たちの見切り - 反応速度計測</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. ホーム画面 -->
+    <div id="home-screen" class="screen active">
+        <h1 class="title">侍たちの見切り</h1>
+        <p class="subtitle">「！」が出たら一閃！コンマ秒の真剣勝負</p>
+        
+        <div class="menu-buttons">
+            <button onclick="startGame()" class="btn btn-primary">ゲーム開始</button>
+            <button onclick="openModal('ranking-modal')" class="btn">🏆 ランキング</button>
+            <button onclick="openModal('settings-modal')" class="btn">⚙️ 設定</button>
+        </div>
+    </div>
+
+    <!-- 2. ゲーム画面 -->
+    <div id="game-screen" class="screen">
+        <div id="status-message">構えろ…</div>
+
+        <div id="stage" onclick="handleStageClick()">
+            <div id="bg-layer"></div>
+            <div id="samurai-left" class="samurai"></div>
+            <div id="samurai-right" class="samurai"></div>
+            <div id="signal-mark" class="hidden">！</div>
+        </div>
+
+        <div id="result-overlay" class="hidden">
+            <div class="result-card">
+                <h2 id="result-title">勝負あり！</h2>
+                <p id="result-detail">反応速度: <span id="reaction-time-val">0</span> ms</p>
+                
+                <div id="register-zone">
+                    <input type="text" id="player-name" placeholder="名前を入力" maxlength="10">
+                    <button onclick="registerScore()" class="btn btn-small">ランキングに登録</button>
+                </div>
+
+                <div class="result-buttons">
+                    <button onclick="startGame()" class="btn btn-primary">再挑戦</button>
+                    <button onclick="goHome()" class="btn">ホームへ戻る</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. ランキングモーダル -->
+    <div id="ranking-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('ranking-modal')">&times;</span>
+            <h2>🏆 TOP 10 RANKING (ms)</h2>
+            <div class="ranking-box">
+                <ol id="ranking-list"></ol>
+            </div>
+            <button onclick="closeModal('ranking-modal')" class="btn">閉じる</button>
+        </div>
+    </div>
+
+    <!-- 4. 設定モーダル -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('settings-modal')">&times;</span>
+            <h2>⚙️ 設定</h2>
+            
+            <div class="setting-item">
+                <label for="bgm-toggle">効果音 / BGM:</label>
+                <input type="checkbox" id="bgm-toggle" checked onchange="toggleSound(this.checked)">
+            </div>
+
+            <!-- 💡 BGM音量設定スライダーを追加 -->
+            <div class="setting-item">
+                <label for="bgm-volume">BGM 音量:</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <input type="range" id="bgm-volume" min="0" max="1" step="0.05" value="0.5" oninput="setBGMVolume(this.value)">
+                    <span id="volume-val" style="width: 35px; text-align: right;">50%</span>
+                </div>
+            </div>
+
+            <p class="setting-info">
+                ※「！」が出現してから0.5秒（500ms）以内にクリックしてください。<br>
+                ※フライング（「！」が出る前のクリック）は失敗となります。
+            </p>
+
+            <button onclick="closeModal('settings-modal')" class="btn">閉じる</button>
+        </div>
+    </div>
+
+    <!-- 🔊 音声要素 -->
+    <audio id="bgm-wind" src="audio/wind_bgm.mp3" loop></audio>
+    <audio id="se-slash" src="audio/slash_se.mp3" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
